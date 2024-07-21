@@ -7,5 +7,3 @@ export const test = (req, res) => {
 // module.exports.test = (req, res) => {
 //     res.send('User data');
 //   };
-  
-  
