@@ -84,20 +84,27 @@
 // }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 =======
+=======
+>>>>>>> parent of bd95447 (Google OAuth)
 import React from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+<<<<<<< HEAD
 >>>>>>> 72cac592f780457b4ab8224889ad75c4c41ee0c5
+=======
+>>>>>>> parent of bd95447 (Google OAuth)
 import {
   signInStart,
   signInSuccess,
   signInFailure,
+<<<<<<< HEAD
 <<<<<<< HEAD
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
@@ -105,6 +112,10 @@ import OAuth from "../components/OAuth";
 } from '../redux/user/userSlice';
 // import OAuth from '../components/OAuth';
 >>>>>>> 72cac592f780457b4ab8224889ad75c4c41ee0c5
+=======
+} from '../redux/user/userSlice';
+// import OAuth from '../components/OAuth';
+>>>>>>> parent of bd95447 (Google OAuth)
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -122,12 +133,17 @@ export default function SignIn() {
     try {
       dispatch(signInStart());
 <<<<<<< HEAD
+<<<<<<< HEAD
       const res = await fetch("/api/auth/signin", {
         method: "POST",
 =======
       const res = await fetch('/api/auth/signin', {
         method: 'POST',
 >>>>>>> 72cac592f780457b4ab8224889ad75c4c41ee0c5
+=======
+      const res = await fetch('/api/auth/signin', {
+        method: 'POST',
+>>>>>>> parent of bd95447 (Google OAuth)
         headers: {
           'Content-Type': 'application/json',
         },
@@ -141,10 +157,14 @@ export default function SignIn() {
       }
       dispatch(signInSuccess(data));
 <<<<<<< HEAD
+<<<<<<< HEAD
       navigate("/");
 =======
       navigate('/');
 >>>>>>> 72cac592f780457b4ab8224889ad75c4c41ee0c5
+=======
+      navigate('/');
+>>>>>>> parent of bd95447 (Google OAuth)
     } catch (error) {
       dispatch(signInFailure(error.message));
     }
@@ -174,8 +194,9 @@ export default function SignIn() {
         >
           {loading ? 'Loading...' : 'Sign In'}
         </button>
-        <OAuth />
+        {/* <OAuth/> */}
       </form>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <div className="flex gap-2 mt-5">
         <p>Dont have an account?</p>
@@ -187,6 +208,12 @@ export default function SignIn() {
         <Link to={'/sign-up'}>
           <span className='text-blue-700'>Sign up</span>
 >>>>>>> 72cac592f780457b4ab8224889ad75c4c41ee0c5
+=======
+      <div className='flex gap-2 mt-5'>
+        <p>Dont have an account?</p>
+        <Link to={'/sign-up'}>
+          <span className='text-blue-700'>Sign up</span>
+>>>>>>> parent of bd95447 (Google OAuth)
         </Link>
       </div>
       {error && <p className='text-red-500 mt-5'>{error}</p>}
