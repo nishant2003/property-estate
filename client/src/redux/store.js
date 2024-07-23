@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-// import { configureStore } from '@reduxjs/toolkit'
-// import  userReducer  from './user/userSlice.js'
-
-// export const store = configureStore({
-//     reducer: {user : userReducer},
-//     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-//         serializableCheck: false,
-//     }),
-// })
 
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import userReducer from './user/userSlice';
@@ -33,14 +23,3 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-=======
-import { configureStore } from '@reduxjs/toolkit'
-import  userReducer  from './user/userSlice.js'
-
-export const store = configureStore({
-    reducer: {user : userReducer},
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-        serializableCheck: false,
-    }),
-})
->>>>>>> 72cac592f780457b4ab8224889ad75c4c41ee0c5
