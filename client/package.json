@@ -23,6 +23,7 @@
     "react-router-dom": "^6.25.1",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
+    "swiper": "^11.1.8",
     "toolkit": "^1.5.4",
     "util": "^0.12.5"
   },
