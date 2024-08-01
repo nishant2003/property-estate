@@ -1,10 +1,5 @@
 import React from 'react'
 
-// export default function Contact() {
-//   return (
-//     <div>Contact</div>
-//   )
-// }
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
