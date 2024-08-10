@@ -1,7 +1,5 @@
-import React from "react";
-
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { useSelector } from "react-redux";
@@ -11,24 +9,72 @@ import {
   FaBath,
   FaBed,
   FaChair,
-  FaMapMarkedAlt,
   FaMapMarkerAlt,
   FaParking,
   FaShare,
 } from "react-icons/fa";
 import Contact from "../components/Contact";
 
-// https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
+SwiperCore.use([Navigation]);
 
 export default function Listing() {
-  SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
   const [contact, setContact] = useState(false);
+  const [userExists, setUserExists] = useState(false); // Added state for user existence
+
   const params = useParams();
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
+  console.log(currentUser)
+  const UserID = currentUser?._id;
+  // console.log(UserID + "userid");
+  var loda = false;
+  useEffect(() => {
+    const checkUserExists = async (userId) => {
+      try {
+        // console.log(userId);
+        const response = await fetch(`/get/${userId}`);
+        const data = await response.json();
+        // console.log(data);
+        if (response.ok) {
+          console.log(userId);
+          setUserExists(true);
+        } else {
+          setUserExists(true);
+        }
+      } catch (err) {
+        setError("Error fetching user data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const persistedState = localStorage.getItem("persist:root");
+    if (persistedState) {
+      const parsedState = JSON.parse(persistedState);
+      const currentUserState = JSON.parse(parsedState.user);
+      const userId = currentUserState?.currentUser?._id;
+
+      console.log(userId);
+      if(userId == undefined){
+        (<Link to="/signip">Sign Up</Link>);
+      }
+      // if(userId != undefined){
+      //   loda = true;
+      //   checkUserExists();
+      // } else {
+      //   setError("No user ID found");
+      //   setLoading(false);
+      //   loda=false;
+      // }
+    } else {
+      setError("No persisted state found");
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -52,13 +98,19 @@ export default function Listing() {
     fetchListing();
   }, [params.listingId]);
 
+
   return (
     <main>
+      {UserID == null
+        ? (navigate("/signup"))
+        : (console.log("User Exists"))
+        }
+
       {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
       {error && (
         <p className="text-center my-7 text-2xl">Something went wrong!</p>
       )}
-      {listing && !loading && !error && (
+      {listing   && !loading && !error && (
         <div>
           <Swiper navigation>
             {listing.imageUrls.map((url) => (
@@ -92,14 +144,13 @@ export default function Listing() {
           )}
           <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
             <p className="text-2xl font-semibold">
-              {/* <div>₹</div> */}
-              {listing.name} - ₹ {/* <div>₹</div> */}
+              {listing.name} - ₹
               {listing.offer
                 ? listing.discountPrice.toLocaleString("en-US")
                 : listing.regularPrice.toLocaleString("en-US")}
               {listing.type === "rent" && " / month"}
             </p>
-            <p className="flex items-center mt-6 gap-2 text-slate-600  text-sm">
+            <p className="flex items-center mt-6 gap-2 text-slate-600 text-sm">
               <FaMapMarkerAlt className="text-green-700" />
               {listing.address}
             </p>
@@ -118,23 +169,23 @@ export default function Listing() {
               {listing.description}
             </p>
             <ul className="text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6">
-              <li className="flex items-center gap-1 whitespace-nowrap ">
+              <li className="flex items-center gap-1 whitespace-nowrap">
                 <FaBed className="text-lg" />
                 {listing.bedrooms > 1
                   ? `${listing.bedrooms} beds `
                   : `${listing.bedrooms} bed `}
               </li>
-              <li className="flex items-center gap-1 whitespace-nowrap ">
+              <li className="flex items-center gap-1 whitespace-nowrap">
                 <FaBath className="text-lg" />
                 {listing.bathrooms > 1
                   ? `${listing.bathrooms} baths `
                   : `${listing.bathrooms} bath `}
               </li>
-              <li className="flex items-center gap-1 whitespace-nowrap ">
+              <li className="flex items-center gap-1 whitespace-nowrap">
                 <FaParking className="text-lg" />
                 {listing.parking ? "Parking spot" : "No Parking"}
               </li>
-              <li className="flex items-center gap-1 whitespace-nowrap ">
+              <li className="flex items-center gap-1 whitespace-nowrap">
                 <FaChair className="text-lg" />
                 {listing.furnished ? "Furnished" : "Unfurnished"}
               </li>

@@ -12,7 +12,7 @@ export default function Home() {
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
   SwiperCore.use([Navigation]);
-  console.log(saleListings);
+  // console.log(offerListings);
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
@@ -134,79 +134,74 @@ export default function Home() {
   );
 }
 
-
 // import React, { useEffect, useState } from "react";
-// import {Link} from "react-router-dom";
-// export default function Home() {
+// import { Link } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 
-//   const [offerListings,setOfferListings] = useState([]);
-//   const [saleListings,setSaleListings] = useState([]);
-//   const [rentListings,setRentListings] = useState([]);
-//   console.log(saleListings)
-//   useEffect(() => {
-//     const fetchOfferListings = async () => {
-//       try
-//       {
-//         const res = await fetch("/api/listing/get?offer=true&limit=4");
-//         const data  = await res.json();
-//         setOfferListings(data);
-//         fetchRentListings();
-//       }
-//       catch(error)
-//       {
-//         console.log(error)
-//       }
-//     }
-//     const fetchRentListings = async () => {
-//       try
-//       {
-//         const res = await fetch("/api/listing/get?type=rent&limit=4");
-//         const data  = await res.json();
-//         setOfferListings(data);
-//         fetchSaleListings();
-//       }
-//       catch(error)
-//       {
-//         console.log(error)
-//       }
-//     }
-//     const fetchSaleListings = async () => {
-//       try
-//       {
-//         const res = await fetch("/api/listing/get?type=sale&limit=4");
-//         const data  = await res.json();
-//         setOfferListings(data);
-//       }
-//       catch(error)
-//       {
-//         console.log(error)
-//       }
-//     }
-// }, []);
+// export default function Home() {
+  // const [userExists, setUserExists] = useState(null);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
+//   var exists = false;
+  // useEffect(() => {
+  //   const checkUserExists = async (userId) => {
+  //     try {
+  //       const response = await fetch(`/api/listing/get?${userId}`);
+  //       const data = await response.json();
+  //       // console.log(response.status);
+
+  //       if (response.ok == true) {
+  //         console.log("in databse")
+  //         exists = true;
+  //         setUserExists(data.user);
+  //       } else {
+  //         exists = false;
+  //         Navigate("/signup");
+  //       }
+  //     } catch (err) {
+  //       setError("Error fetching user data");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  // };
+
+  //   const persistedState = localStorage.getItem("persist:root");
+  //   if (persistedState) {
+  //     const parsedState = JSON.parse(persistedState);
+  //     const currentUserState = JSON.parse(parsedState.user); // Adjust path based on your state structure
+  //     const userId = currentUserState?.currentUser?._id;
+
+  //     if (userId) {
+  //       checkUserExists(userId);
+  //     } else {
+  //       setError("No user ID found");
+  //       setLoading(false);
+  //     }
+  //   } else {
+  //     navigate("/signup");
+  //     setError("No persisted state found");
+  //     setLoading(false);
+  //   }
+  // }, []);
+
+//   if (loading) return <div>Loading...</div>;
+//   if (error) return <div className="text-red-500">{error}</div>;
 
 //   return (
 //     <div>
-//         {/* top */}
-//         <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
-//           <h1 className="text-slate-700 font-bold text-3xl  lg:text-6xl">
-//             Find your next <span className="text-slate-500">perfect</span> 
-//             <br/>
-//             place with ease
-//           </h1>
-//           <div className="text-gray-400 text-xs sm:text-sm">
-//             Property hub is the best place to 
-//             find your next property to stay.
-//             <br/>
-//             We have the wide variety of properties for you to
-//             choose from.
-//           </div>
-//           <Link to="/search" className="text-xs sm:text-sm text-blue-800 font-bold hover:underline">Let's explore some properties.... </Link>
+//       <h1>Home Page</h1>
+//       {userExists ? (
+//         <div>
+//           <h2>Welcome, {userExists.username}!</h2>
+//           {/* Render user-related content here */}
 //         </div>
-    
-//         {/* swiper */}
-
-
-//         {/* listing results */}
+//       ) : (
+//         <div>
+//           <p>User does not exist</p>
+//           <Link to="/signin">Sign In</Link>
+//         </div>
+//       )}
 //     </div>
 //   );
 // }
+

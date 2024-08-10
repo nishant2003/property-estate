@@ -77,3 +77,16 @@ export const getUser = async (req, res, next) => {
         next(error);
     }
 };
+
+export const userExists = async (req, res, next) => {
+    try {
+      const user = await User.findById(req.params.id); // Use findById
+      if (!user) {
+        return res.status(404).json({ exists: false, message: 'User not found!' });
+      }
+      res.status(200).json({ exists: true, user });
+    } catch (error) {
+      next(error);
+    }
+  };
+  
