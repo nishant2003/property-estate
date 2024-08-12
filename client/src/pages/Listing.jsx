@@ -220,18 +220,19 @@ export default function Listing() {
               </li>
             </ul>
             {currentUser && listing.userRef !== currentUser._id && !contact && (
+              <button>
+              </button>
+            )}
+      
+            {currentUser && listing.userRef !== currentUser._id && !contact && (
               <button
                 onClick={() => setContact(true)}
-                className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
+                className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
               >
-                Contact Owner
+                Contact landlord
               </button>
             )}
             {contact && <Contact listing={listing} />}
-            <button className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3" 
-            onClick={handleSubmit}>
-              Whatsapp owner
-            </button>
           </div>
         </div>
       )}
