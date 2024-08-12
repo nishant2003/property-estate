@@ -111,6 +111,17 @@ export default function Listing() {
       sessionStorage.setItem('alertShown', 'true');
     }
   }
+  const handleSubmit = () => {
+    window.open("https://api.whatsapp.com/send?phone=8219268634", "_blank", "noreferrer");
+  };
+  // const handleSubmit = async () => {
+  //   <a
+  //     className="btn btn-hire"
+  //     href="https://api.whatsapp.com/send?phone=8219268634"
+  //     rel="noreferrer"
+  //     target="_blank"
+  //     ></a>
+  // }
   return (
     <main>
       {/* <ToastContainer /> */}
@@ -213,10 +224,14 @@ export default function Listing() {
                 onClick={() => setContact(true)}
                 className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
               >
-                Contact landlord
+                Contact Owner
               </button>
             )}
             {contact && <Contact listing={listing} />}
+            <button className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3" 
+            onClick={handleSubmit}>
+              Whatsapp owner
+            </button>
           </div>
         </div>
       )}
