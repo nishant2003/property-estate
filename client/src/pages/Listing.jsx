@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -5,6 +6,8 @@ import SwiperCore from "swiper";
 import { useSelector } from "react-redux";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
+import "react-toastify/dist/ReactToastify.css";
+import { toast,ToastContainer } from "react-toastify";
 import {
   FaBath,
   FaBed,
@@ -14,6 +17,7 @@ import {
   FaShare,
 } from "react-icons/fa";
 import Contact from "../components/Contact";
+import "react-toastify/dist/ReactToastify.css";
 
 SwiperCore.use([Navigation]);
 
@@ -31,9 +35,12 @@ export default function Listing() {
   console.log(currentUser)
   const UserID = currentUser?._id;
   // console.log(UserID + "userid");
+  
   var loda = false;
+  
   useEffect(() => {
     const checkUserExists = async (userId) => {
+      
       try {
         // console.log(userId);
         const response = await fetch(`/get/${userId}`);
@@ -58,10 +65,10 @@ export default function Listing() {
       const currentUserState = JSON.parse(parsedState.user);
       const userId = currentUserState?.currentUser?._id;
 
-      console.log(userId);
-      if(userId == undefined){
-        (<Link to="/signip">Sign Up</Link>);
-      }
+      // console.log(userId);
+      // if(userId == 'undefined'){
+      //   notify();
+      // }
       // if(userId != undefined){
       //   loda = true;
       //   checkUserExists();
@@ -97,16 +104,27 @@ export default function Listing() {
     };
     fetchListing();
   }, [params.listingId]);
-
-
+  const notify = () => toast("please Sign up first!");
+  function showAlertOnce() {
+    if (!sessionStorage.getItem('alertShown')) {
+      alert('Please Sign to Explore!!');
+      sessionStorage.setItem('alertShown', 'true');
+    }
+  }
   return (
     <main>
+      {/* <ToastContainer /> */}
       {UserID == null
-        ? (navigate("/signup"))
+        ? (
+        // alert("Please Sign to Explore!!"),
+        showAlertOnce(),
+          navigate("/signup")
+        )
+          
         : (console.log("User Exists"))
         }
 
-      {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
+      {loading  &&<p className="text-center my-7 text-2xl">Loading...</p>}
       {error && (
         <p className="text-center my-7 text-2xl">Something went wrong!</p>
       )}

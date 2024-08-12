@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 const initialState = {
     currentUser: null,
@@ -12,11 +13,14 @@ const userSlice = createSlice({
     reducers: {
         signInStart: (state) => {
             state.loading = true;
+            
         },
         signInSuccess: (state, action) => {
+            // toast.success('Signing in...');
             state.currentUser = action.payload;
             state.loading = false;
             state.error = null;
+            
         },
         signInFailure: (state, action) => {
             state.error = action.payload;

@@ -1,7 +1,8 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
+import { toast,ToastContainer } from 'react-toastify';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -40,8 +41,16 @@ export default function SignUp() {
       setError(error.message);
     }
   };
+  useEffect(() => {
+    const showToast = localStorage.getItem("showToast");
+    if (showToast === "true") {
+      toast("Please sign up first!");
+      localStorage.removeItem("showToast");
+    }
+  }, []);
   return (
     <div className='p-3 max-w-lg mx-auto'>
+      <ToastContainer />
       <h1 className='text-3xl text-center font-semibold my-7'>Sign Up</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input

@@ -9,6 +9,7 @@ import { app } from "../firebase.js";
 import { set } from "mongoose";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function CreateListing() {
   const navigate = useNavigate();
@@ -150,18 +151,22 @@ export default function CreateListing() {
         setError(data.message);
       }
       navigate(`/listing/${data._id}`);
+      
     } catch (error) {
       setError(error.message);
       setLoading(false);
     }
   };
-
+  // const notify = () => toast('Property added Succsfully!');
+  //   const handleClick = () => {
+  //     notify(); 
+  //   };
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl text-center my-7 font-semibold">
         Create Listing
       </h1>
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
+      <form onSubmit={handleSubmit}  className="flex flex-col sm:flex-row gap-4">
         <div className="flex flex-col gap-4 flex-1 ">
           <input
             type="text"
@@ -353,7 +358,7 @@ export default function CreateListing() {
                 </button>
               </div>
             ))}
-          <button
+          <button 
             disabled={loading || Uploading}
             className="p-3 bg-slate-700 text-white rounded-lg 
             uppercase hover:opacity-95 disabled-opacity-80"
