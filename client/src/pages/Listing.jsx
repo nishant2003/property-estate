@@ -132,7 +132,7 @@ export default function Listing() {
           navigate("/signup")
         )
           
-        : (console.log("User Exists"))
+        : (console.log("User Exists"),navigate("/signup"))
         }
 
       {loading  &&<p className="text-center my-7 text-2xl">Loading...</p>}

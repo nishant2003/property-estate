@@ -34,8 +34,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        // target: 'http://localhost:3000',
-        target: 'http://node-api:3000',
+        target: 'http://localhost:3000',
+        //for running in docker container uncomment below Line of code
+        // target: 'http://node-api:3000', 
         changeOrigin: true,
         secure: false,
         // rewrite: (path) => path.replace(/^\/api/, ''),

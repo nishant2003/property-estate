@@ -39,7 +39,7 @@ export default function SignIn() {
       dispatch(signInSuccess(data));
       // toast.success('Sign In Successful!'); // Show success toast
       localStorage.setItem('signInSuccess', 'true');
-      navigate('/home');
+      navigate('/');
       // toast.success('Sign In Successful!');
       
     } catch (error) {
@@ -76,7 +76,7 @@ export default function SignIn() {
       </form>
       <div className='flex gap-2 mt-5'>
         <p>Don't have an account?</p>
-        <Link to={'/sign-up'}>
+        <Link to={'/signup'}>
           <span className='text-blue-700'>Sign up</span>
         </Link>
       </div>
