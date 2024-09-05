@@ -44,9 +44,6 @@ export default defineConfig({
       },
     },
   },
-  build: {
-    outDir: '../dist/client',
-  },
   plugins: [
     react(),
     nodePolyfills({
